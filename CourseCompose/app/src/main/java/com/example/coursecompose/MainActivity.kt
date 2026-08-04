@@ -1,6 +1,7 @@
 package com.example.coursecompose
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -10,9 +11,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,24 +33,21 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            CourseComposeTheme {
-                Column (Modifier.safeContentPadding(), content = {
-                    var name by remember {  mutableStateOf("李泓锟") }
-                    CharCounter(name)
-
-                    lifecycleScope.launch {
-                        delay(3000)
-                        name = "lh"
-                    }
-                })
+            Box {
+                CustomCheckbox()
             }
         }
     }
+}
 
-    @Composable
-    fun CharCounter(value: String) {
-        val length = remember(value) { value.length }
-        Text("字符串长度: ${length}")
-    }
+@Preview
+@Composable
+private fun CustomCheckbox() {
+    var address by remember {  mutableStateOf("lhk") }
+    var checked by remember { mutableStateOf(false) }
+    Checkbox(checked,  { newChecked ->
+        if (newChecked && address.isEmpty()) {
 
+        } else checked = newChecked
+    })
 }
