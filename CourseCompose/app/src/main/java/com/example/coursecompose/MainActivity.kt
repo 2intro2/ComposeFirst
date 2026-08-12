@@ -7,6 +7,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -36,6 +39,7 @@ import kotlinx.coroutines.launch
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.ColorScheme
+import androidx.compose.runtime.rememberCoroutineScope
 import com.example.coursecompose.ui.theme.DarkColorScheme
 import com.example.coursecompose.ui.theme.LightColorScheme
 
@@ -45,29 +49,24 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            LocalActivity.current
-            Demo()
+            AnimatedButton()
         }
     }
 }
 
 @Preview
 @Composable
-private fun Demo() {
-    Row {
-        MaterialTheme() {
-            CustomButton(DarkColorScheme)
+private fun AnimatedButton() {
+    CourseComposeTheme {
+        Card(Modifier.size(200.dp)) {
+            var paddingX by remember { mutableStateOf(0.dp) }
+            val animatePaddingX by animateDpAsState(paddingX, spring(Spring.DampingRatioHighBouncy))
+            Button({
+               if (paddingX == 100.dp) paddingX = 0.dp else paddingX = 100.dp
+            }, Modifier.padding(start = animatePaddingX)) {
+                Text("lhk")
+            }
         }
-        MaterialTheme() {
-            CustomButton(LightColorScheme)
-        }
-    }
-}
-
-@Composable
-private fun CustomButton(colorTheme: ColorScheme) {
-    Button({}, Modifier.border(2.dp, colorTheme.primary)) {
-        Text("lhk")
     }
 }
 
