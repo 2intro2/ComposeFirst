@@ -46,6 +46,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.compose.material.icons.extended)
     implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.nav3)
+    implementation(libs.viewmodel.nav3)
+
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
