@@ -48,6 +48,9 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.nav3)
     implementation(libs.viewmodel.nav3)
+    implementation(libs.m3.navsuite)
+    implementation(libs.m3.nav3)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
